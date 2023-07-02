@@ -4,7 +4,8 @@
 <head>
     <title>Viewport Intersection Example</title>
     <style>
-        #myElement {
+        #myElement,
+        #myElement1 {
             width: 200px;
             height: 200px;
             background-color: red;
@@ -21,33 +22,32 @@
 
 <body>
     <div id="myElement">This element will be monitored.</div>
-    <div id="myElement1">This element will be monitored.</div>
+    <div id="myElement1">This is second element will be monitored.</div>
 
     <script>
         const elementToObserve = document.querySelector('#myElement');
         const elementToObserve1 = document.querySelector('#myElement1');
-        const observer = new IntersectionObserver(entries => {
-            console.log(entries)
-            entries.forEach(entry => {
-                if (entry.target == elementToObserve) {
-                    if (entry.isIntersecting) {
-                        // entry.target.classList.add('visible');
-                        console.log('Element is now visible!', entry.target);
-                    } else {
-                        // entry.target.classList.remove('visible', entry.target);
-                        console.log('Element is not visible', entry.target);
-                    }
+        const observer = new IntersectionObserver(([entries]) => {
+            // entries.forEach(entry => {
+            if (entries.target == elementToObserve) {
+                if (entries.isIntersecting) {
+                    // entry.target.classList.add('visible');
+                    console.log('Element is now visible!', entries.target);
+                } else {
+                    // entry.target.classList.remove('visible', entry.target);
+                    console.log('Element is not visible', entries.target);
                 }
-                if (entry.target == elementToObserve1) {
-                    if (entry.isIntersecting) {
-                        // entry.target.classList.add('visible', entry.target);
-                        console.log('Element is now visible!', entry.target);
-                    } else {
-                        // entry.target.classList.remove('visible', entry.target);
-                        console.log('Element is not visible', entry.target);
-                    }
+            }
+            if (entries.target == elementToObserve1) {
+                if (entries.isIntersecting) {
+                    // entry.target.classList.add('visible', entry.target);
+                    console.log('Element is now visible!', entries.target);
+                } else {
+                    // entry.target.classList.remove('visible', entry.target);
+                    console.log('Element is not visible', entries.target);
                 }
-            });
+            }
+            // });
         });
 
 
